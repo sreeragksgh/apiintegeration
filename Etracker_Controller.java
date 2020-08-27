@@ -3,13 +3,14 @@ package com.example.etracker.Controller;
 
 
 import java.util.Collection;
-import java.util.Date;
+
+
+
 import java.util.List;
 import java.util.Map;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,31 +32,21 @@ public class Etracker_Controller {
 	private Etracker_Service exp;
 	
 	@GetMapping(PathRoutes.SearchSQL.TOTAL_BAR_YEAR)
-	public Map<String, java.lang.Object> graph1(@RequestParam int userId ,int year, int month ){
-		return exp.graph1(userId,year);
+	public Map<String, java.lang.Object> graph1(@RequestParam int userId ){
+		return exp.graph1(userId);
 	}
 	
 	@GetMapping(PathRoutes.SearchSQL.TOTAL_BAR_MONTH)
-	public Map<String, java.lang.Object> graph2(@RequestParam int userId, int year, int month ){
-		return exp.graph2(userId,year,month);
+	public Map<String, java.lang.Object> graph2(@RequestParam int userId ){
+		return exp.graph2(userId);
 	}
 	@GetMapping(PathRoutes.SearchSQL.TOTAL_LINE_YEAR)
-	public Collection<Map<String,java.lang.Object>>  graph3(@RequestParam int userId, int year, int month ){
-		return exp.graph3(userId,year);
+	public Collection<Map<String,java.lang.Object>>  graph3(@RequestParam int userId ){
+		return exp.graph3(userId);
 	}
 	@GetMapping(PathRoutes.SearchSQL.TOTAL_LINE_MONTH)
-	public Collection<Map<String,java.lang.Object>> graph4(@RequestParam int userId, int year, int month ){
-		return exp.graph4(userId,year,month);
-	}
-	@GetMapping(PathRoutes.SearchSQL.CATEGORY_BAR_MONTH)
-	public List<Map<String, Object>> monthlycategorysum(@RequestParam int userId,int month,int year)
-	{
-		return exp.monthlycategorysum(userId,month,year);
-	}
-	@GetMapping(PathRoutes.SearchSQL.CATEGORY_BAR_YEAR)
-	public List<Map<String, Object>> yearlycategorysum(@RequestParam int userId, int year,int month)
-	{
-		return exp.yearlycategorysum(userId,year);
+	public Collection<Map<String,java.lang.Object>> graph4(@RequestParam int userId ){
+		return exp.graph4(userId);
 	}
 
 
@@ -69,31 +60,26 @@ public class Etracker_Controller {
 	 exp.addexpense(userId,item,categoryId,amount,transactionDate);
 	 }
 	
-	@PostMapping(PathRoutes.SearchSQL.ADD_INCOME_CATEGORY)
-	 public void addincomecategory(@RequestParam String categoryName, @RequestParam int userId ) {
-	 exp.addincomecategory(categoryName, userId);
-	 }
-	@PostMapping(PathRoutes.SearchSQL.ADD_EXPENSE_CATEGORY)
-	 public void addexpensecategory(@RequestParam String categoryName, @RequestParam int userId ) {
-	 exp.addexpensecategory(categoryName, userId);
-	 }
-	
-	
-	
-	
-	
-	
 	@GetMapping(PathRoutes.SearchSQL.LIST_CATEGORY_EXPENSE)
-	public List<Map<String, Object>> liscategoryexpense(@RequestParam int userId)
+	public List<Map<String, Object>> liscategoryexpense()
 	{
-		return exp.liscategoryexpense(userId);
+		return exp.liscategoryexpense();
 	}
 	@GetMapping(PathRoutes.SearchSQL.LIST_CATEGORY_INCOME)
-	public List<Map<String, Object>> liscategoryincome(@RequestParam int userId)
+	public List<Map<String, Object>> liscategoryincome()
 	{
-		return exp.liscategoryincome(userId);
+		return exp.liscategoryincome();
 	}
-	
+	@GetMapping(PathRoutes.SearchSQL.CATEGORY_BAR_MONTH)
+	public List<Map<String, Object>> monthlycategorysum(@RequestParam int userId)
+	{
+		return exp.monthlycategorysum(userId);
+	}
+	@GetMapping(PathRoutes.SearchSQL.CATEGORY_BAR_YEAR)
+	public List<Map<String, Object>> yearlycategorysum(@RequestParam int userId)
+	{
+		return exp.yearlycategorysum(userId);
+	}
 	
 	@GetMapping(PathRoutes.SearchSQL.GET_INCOME)
 	public Collection<Map<String,Object>> getIncome(@RequestParam int userId){
